@@ -164,6 +164,12 @@ pub fn list_directory(path: &str) {
 
         closedir(dir);
     }
+
+    for file in files {
+        println!("{} {:>10} {}", file.permissions.as_string(), file.size, file.name);
+    }
+
+
 }
 
 /// Sorts the file names alphabetically (base command)
