@@ -1,8 +1,3 @@
-/// Usage
-/// ```
-/// let file_kind =  CrustFileKind::from_mode(st_mode);
-/// println!("Type: {}", file_kind.as_str());
-/// ```
 enum CrustFileKind {
     Regular,
     Directory,
@@ -173,8 +168,8 @@ pub fn list_directory(path: &str) {
 }
 
 /// Sorts the file names alphabetically (base command)
-pub fn sort_filenames(filenames: &mut Vec<&str>) {
-    todo!() 
+fn sort_filenames(files: &mut Vec<CrustFileMetadata>) {
+    files.sort_by(|a, b| b.name.cmp(&a.name))
 }
 
 /// This will output in colour (base command)
@@ -183,10 +178,17 @@ pub fn colour_code(filenames: &Vec<&str>) {
 
 /// Skip any hidden files in the dir (base command)
 /// Should also output in coloumns and rows
-pub fn skip_hidden(filenames: &mut Vec<&str>) {
+fn skip_hidden(files: &mut Vec<CrustFileMetadata>) {
+    for file in files {
+        if file.name.starts_with(".") {
+            continue;
+        }
+        println!("{}", file.name);
+    }
 }
 
-pub fn sort_file_size() {
+fn sort_file_size(files: &mut Vec<CrustFileMetadata>) {
+    files.sort_by(|a,b| b.size.cmp(&a.size))
 }
 
 /* -a shows all files including hidden files (all files)
