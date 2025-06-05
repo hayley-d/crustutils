@@ -1,3 +1,4 @@
+/// CrustFileKind is an enum of different file types that can be identified by libc
 enum CrustFileKind {
     Regular,
     Directory,
